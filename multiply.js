@@ -9,7 +9,7 @@ module.exports = (config) => {
       return next(err);
     }
     const result = num * config.by;
-    req.doubled = result;
+    req.multiplied = result;
     next();
   };
 };
