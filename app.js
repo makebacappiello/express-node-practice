@@ -15,7 +15,14 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use((req, res, next) => {
+  if (req.body.num === undefined) {
+    return next();
+  }
   const num = parseFloat(req.body.number);
+  if (isNaN(num)) {
+    const err = new Error("Please use only numbers");
+    return next(err);
+  }
   const result = num * 2;
   req.doubled = result;
   next();
